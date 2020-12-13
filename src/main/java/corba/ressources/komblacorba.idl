@@ -1,0 +1,47 @@
+module ConnectorCorba{
+    
+  
+   struct CorbaStartGameInfo {
+      
+      long playerId;
+      long maze[10][10]; 
+     };
+  
+    struct Player{
+
+       string name;
+       long id; 
+     };
+     struct Sprite{
+
+       long id;
+       string kind;
+       string name;
+       long playerid;
+       double direction;
+
+        };
+  
+    struct CorbaDynamicGameModel{
+
+     long long frame;
+     Player player [10];
+     Sprite sprite [10];
+    };
+
+  
+ 
+    interface ClientCorba{
+        void modelChanged(in CorbaDynamicGameModel model);
+    };
+
+    interface ServerCorba{
+      
+      CorbaStartGameInfo connect(in string playerName,in ClientCorba client);
+      void moveLeft(in long playerId);
+      void moveRight(in long playerId);
+      void moveUp(in long playerId);
+      void moveDown(in long playerId);
+
+    };
+};
